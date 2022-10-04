@@ -96,7 +96,6 @@ function equals() {
     display.value = eval("Math.pow(" + baseR + ", 1/" + root + ")");
   } else {
     display.value = eval(display.value);
-    checkLength();
     syntaxError();
   }
 }
@@ -141,7 +140,21 @@ function factorial() {
 }
 
 function pi() {
-  display.value = display.value * Math.PI;
+  let lastChar = display.value.charAt(display.value.length - 1);
+  if (
+    lastChar === "*" ||
+    lastChar === "/" ||
+    lastChar === "+" ||
+    lastChar === "-" ||
+    lastChar === "^" ||
+    lastChar === "√"
+  ) {
+    console.log("si");
+    display.value += Math.PI;
+  } else {
+    console.log("no");
+    display.value = Math.PI;
+  }
 }
 
 function square() {
@@ -194,12 +207,4 @@ function nRoot() {
 
 function exp() {
   display.value = Math.exp(display.value);
-}
-
-function radians() {
-  display.value = display.value * (Math.PI / 180);
-}
-
-function degrees() {
-  display.value = display.value * (180 / Math.PI);
 }
