@@ -1,5 +1,3 @@
-//Este archivo es el default, hay funciones que no usé
-
 let display = document.getElementById("screen");
 let buttons = document.getElementsByClassName("button");
 
@@ -75,16 +73,6 @@ Array.prototype.forEach.call(buttons, function (button) {
   });
 });
 
-function syntaxError() {
-  if (
-    eval(display.value) == SyntaxError ||
-    eval(display.value) == ReferenceError ||
-    eval(display.value) == TypeError
-  ) {
-    display.value == "Syntax Error";
-  }
-}
-
 function equals() {
   if (display.value.indexOf("^") > -1) {
     let base = display.value.slice(0, display.value.indexOf("^"));
@@ -95,8 +83,12 @@ function equals() {
     let baseR = display.value.slice(display.value.indexOf("√") + 1);
     display.value = eval("Math.pow(" + baseR + ", 1/" + root + ")");
   } else {
-    display.value = eval(display.value);
-    syntaxError();
+    try {
+      display.value = eval(display.value);
+    } catch (error) {
+      alert(error);
+      display.value = "";
+    }
   }
 }
 
