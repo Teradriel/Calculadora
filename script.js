@@ -87,7 +87,7 @@ function equals() {
       display.value = eval(display.value);
     } catch (error) {
       alert(error);
-      display.value = "";
+      clear();
     }
   }
 }
@@ -166,7 +166,23 @@ function cubeRoot() {
 }
 
 function percent() {
-  display.value = display.value / 100;
+  sum = display.value.indexOf("+");
+  res = display.value.indexOf("-");
+  if (sum >= 0 && res >= 0) {
+    alert("No se puede calcular así");
+    clear();
+  } else if (sum >= 0 && res < 0) {
+    num1 = parseFloat(display.value.slice(0, sum));
+    num2 = parseFloat(display.value.slice(sum + 1, display.value.length));
+    display.value = num1 + num1 * (num2 / 100);
+  } else if (res >= 0 && sum < 0) {
+    num1 = parseFloat(display.value.slice(0, res));
+    num2 = parseFloat(display.value.slice(res + 1, display.value.length));
+    display.value = num1 - num1 * (num2 / 100);
+  } else {
+    alert("No se puede calcular");
+    clear();
+  }
 }
 
 function sin() {
